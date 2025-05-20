@@ -1,0 +1,39 @@
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+    name: { 
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    refreshToken: {
+        type: String
+    },
+    OTP: {
+        type: String
+    },
+    OTPExpiry: {
+        type: Date
+    },
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordTokenExpiry: {
+        type: Date
+    }
+});
+
+const userModel = mongoose.model("user", userSchema);
