@@ -24,8 +24,7 @@ const fileSchema = new mongoose.Schema({
         default: null
     },
     url: {
-        type: String,
-        required: true
+        type: String
     },
     type: {
         type: String,
