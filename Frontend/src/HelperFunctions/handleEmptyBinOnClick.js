@@ -51,7 +51,7 @@ async function handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails
             setUserDetails((prevUserDetails) => {
                 return {
                     ...prevUserDetails,
-                    ["spaceConsumed"]: parseFloat((prevUserDetails["spaceConsumed"] - data.deletedSize).toFixed(10))
+                    ["spaceConsumed"]: data.newSpaceConsumed
                 };
             });
 

@@ -65,7 +65,7 @@ async function handleDeleteOnClick(file, displayData, setDisplayData, userDetail
             setUserDetails((prevUserDetails) => {
                 return {
                     ...prevUserDetails,
-                    ["spaceConsumed"]: parseFloat((prevUserDetails["spaceConsumed"] - data.deletedSize).toFixed(10))
+                    ["spaceConsumed"]: data.newSpaceConsumed
                 };
             });
 
