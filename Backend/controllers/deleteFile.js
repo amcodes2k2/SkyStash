@@ -27,6 +27,9 @@ async function helper(userId, fileId)
                 {
                     const deletedDocument = await fileModel.findOneAndDelete({_id: child._id, userId: userId});
                     deletedSize = parseFloat((((deletedSize * 10) + (deletedDocument.size * 10)) / 10).toFixed(10));
+                    
+                    console.log(deletedDocument.size);
+                    console.log(deletedSize);
                 }
             }
             catch(error)
@@ -39,6 +42,9 @@ async function helper(userId, fileId)
         //delete folder/file after its children have been deleted in the previous step
         const deletedDocument = await fileModel.findOneAndDelete({_id: fileId, userId: userId});
         deletedSize = parseFloat((((deletedSize * 10) + (deletedDocument.size * 10)) / 10).toFixed(10));
+        
+        console.log(deletedDocument.size);
+        console.log(deletedSize);
     }
     catch(error)
     {
