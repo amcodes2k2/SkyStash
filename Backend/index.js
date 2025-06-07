@@ -10,7 +10,7 @@ require("dotenv").config();
 app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({origin: [process.env.FRONTEND_BASE_URL], credentials: true}));
 
 app.get("/", (req, res) => {
     res.send("SkyStash backend is up and running...");
