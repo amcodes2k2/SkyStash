@@ -27,9 +27,9 @@ function UploadFileForm(props)
                 return;
             }
 
-            if((Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1) > 10.0)
+            if((Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1) > 4.5)
             {
-                toast.error("File size should not exceed 10 MB.");
+                toast.error("File size should not exceed 4.5 MB.");
                 return;
             }
 
