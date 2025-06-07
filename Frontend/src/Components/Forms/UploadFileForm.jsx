@@ -111,7 +111,6 @@ function UploadFileForm(props)
         catch(error)
         {
             setFile(null);
-            setIsRunning(false);
             setDisplayStates((prevDisplayStates) => {
                 return {
                     ...prevDisplayStates,

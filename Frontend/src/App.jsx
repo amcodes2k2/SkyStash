@@ -69,7 +69,7 @@ function App()
     <div className="w-[100vw] h-[100dvh] flex items-center justify-center gap-2">
       <FadeLoader color="white" height="15px" width="5px"></FadeLoader>
 
-      <p className="text-white font-semibold text-lg">
+      <p className="text-white font-semibold text-lg md:text-base">
         Attempting to persist login
       </p>
     </div>
