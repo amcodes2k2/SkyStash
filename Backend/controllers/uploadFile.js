@@ -20,11 +20,11 @@ async function fileUpload(req, res)
             });
         }
 
-        if((Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1) > 10.0)
+        if((Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1) > 4.5)
         {
             return res.status(400).json({
                 success: false,
-                message: "File size cannot exceed 10 MB."
+                message: "File size cannot exceed 4.5 MB."
             });
         }
 
