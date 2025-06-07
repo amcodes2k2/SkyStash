@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
-const fileModel = require("../models/file.js");
 const imagekit = require("../config/ImageKit.js");
+
+const userModel = require("../models/user.js");
+const fileModel = require("../models/file.js");
 
 async function fileUpload(req, res)
 {
@@ -8,7 +10,7 @@ async function fileUpload(req, res)
     {
         const user = req.user;
         const file = (req.files) ? Object.values(req.files)[0] : null;
-        const parentId = (req.body?.parentId) ? req.body.parentId : null;
+        const parentId = (req.body?.parentId && req.body.parentId !== "null") ? req.body.parentId : null;
         
         if(!file)
         {
@@ -18,11 +20,27 @@ async function fileUpload(req, res)
             });
         }
 
+        if((Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1) > 10.0)
+        {
+            return res.status(400).json({
+                success: false,
+                message: "File size cannot exceed 10 MB."
+            });
+        }
+
         if(file.mimetype.startsWith("image/") === false && file.mimetype !== "application/pdf")
         {
             return res.status(400).json({
                 success: false,
                 message: "File must be an image or a pdf."
+            });
+        }
+
+        if(user.spaceConsumed + (Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1) > 256.0)
+        {
+            return res.status(400).json({
+                success: false,
+                message: "Space limit exceeded. Delete some file(s) and try again."
             });
         }
 
@@ -67,7 +85,7 @@ async function fileUpload(req, res)
         const newFile = {
             name: file.name,
             path: response.filePath,
-            size: file.size,
+            size: parseFloat((Math.round(((file.size) / 1048576) * 100) / 100).toFixed(1)),
             userId: user._id,
             parentId: parentId,
             url: response.url,
@@ -78,6 +96,7 @@ async function fileUpload(req, res)
         };
 
         const fileDocument = await fileModel.create(newFile);
+        await userModel.findOneAndUpdate({_id: user._id}, {$set: {spaceConsumed: parseFloat((fileDocument.size + user.spaceConsumed).toFixed(10))}});
 
         res.status(202).json({
             success: true,
@@ -87,6 +106,7 @@ async function fileUpload(req, res)
     }
     catch(error)
     {
+        console.log(error);
         res.status(500).json({
             success: false,
             message: error.message

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 
@@ -9,6 +10,11 @@ require("dotenv").config();
 app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({origin: true, credentials: true}));
+
+app.get("/", (req, res) => {
+    res.send("SkyStash backend is up and running...");
+});
 
 const authRoutes = require("./routes/auth.js");
 app.use("/api/v1", authRoutes);

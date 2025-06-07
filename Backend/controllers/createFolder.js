@@ -9,14 +9,14 @@ async function folderCreation(req, res)
         const parentId = (req.body?.parentId) ? req.body.parentId : null;
         let folderName = (req.body?.folderName) ? req.body.folderName : null;
         
-        folderName = folderName.trim();
-        if(folderName === "")
+        if(!folderName || folderName.trim() === "")
         {
             return res.status(400).json({
                 success: false,
                 message: "Folder name cannot be empty."
             });
         }
+        folderName = folderName.trim();
 
         if(parentId)
         {

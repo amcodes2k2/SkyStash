@@ -47,7 +47,8 @@ async function refreshAccessToken(req, res)
             user: {
                 id: userDocument._id,
                 name: userDocument.name,
-                accessToken: newAccessToken
+                accessToken: newAccessToken,
+                spaceConsumed: userDocument.spaceConsumed
             },
             message: "Token has been refreshed."
         });

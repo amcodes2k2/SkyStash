@@ -12,6 +12,12 @@ router.post("/create-folder", verifyJWT, createFolder);
 const getContents = require("../controllers/getContents.js");
 router.get("/get-contents/:parentId", verifyJWT, getContents);
 
+const getStarred = require("../controllers/getStarred.js");
+router.get("/get-starred", verifyJWT, getStarred);
+
+const getTrashed = require("../controllers/getTrashed.js");
+router.get("/get-trashed", verifyJWT, getTrashed);
+
 const trashFile = require("../controllers/trashFile.js");
 router.patch("/trash-file/:fileId", verifyJWT, trashFile);
 

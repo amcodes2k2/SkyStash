@@ -69,7 +69,8 @@ async function login(req, res)
             user: {
                 id: userDocument._id,
                 name: userDocument.name,
-                accessToken: accessToken
+                accessToken: accessToken,
+                spaceConsumed: userDocument.spaceConsumed
             },
             message: "User logged in successfully."
         });
