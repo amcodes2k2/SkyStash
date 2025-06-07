@@ -80,7 +80,7 @@ function DashBoard()
 
     useEffect(function(){
         if(displayStates.shouldRetry === true)
-            handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails, refreshToken, setDisplayStates, setShouldRetry);
+            handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails, refreshToken, setDisplayStates);
     }, [userDetails.accessToken]);
 
     return(
@@ -189,7 +189,7 @@ function DashBoard()
                         {
                             (displayData.activeTab === "Bin") ?
                             <button disabled={displayStates.isRunning || displayStates.isClearing || displayStates.isLoading || displayData.files.length === 0} 
-                                onClick={() => handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails, refreshToken, setDisplayStates, setShouldRetry)}
+                                onClick={() => handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails, refreshToken, setDisplayStates)}
                                 className="bg-red-500 text-sm font-semibold text-center w-[102px] py-[0.2rem] rounded">
                                 {
                                     (displayStates.isClearing === false) ?

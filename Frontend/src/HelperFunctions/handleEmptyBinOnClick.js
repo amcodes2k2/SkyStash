@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-async function handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails, refreshToken, setDisplayStates, setFileStatus)
+async function handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails, refreshToken, setDisplayStates)
 {
     try
     {
@@ -62,9 +62,9 @@ async function handleEmptyBinOnClick(setDisplayData, userDetails, setUserDetails
             if(response.status === 401)
             {
                 await refreshToken();
-                setFileStatus((prevFileStatus) => {
+                setDisplayStates((prevDisplayStates) => {
                     return {
-                        ...prevFileStatus,
+                        ...prevDisplayStates,
                         ["shouldRetry"]: true
                     };
                 });
